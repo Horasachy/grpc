@@ -1,11 +1,21 @@
-message Foo {
-  repeated Bar bars = 1;
-}
+syntax = "proto3";
+
 message Bar {
-  optional int32 i = 1;
-  optional int32 j = 2;
+  int32 i = 1;
 }
 
 service Test {
-  rpc CreateFoo(Foo) returns (Foo) {};
+  rpc SayRepeated (HelloRepeatedRequest) returns (HelloRepeatedReply) {};
+}
+
+// The request message containing the user's name.
+message HelloRepeatedRequest {
+  string name = 1;
+  repeated Bar bars = 2;
+}
+
+// The response message containing the greetings
+message HelloRepeatedReply {
+  string name = 1;
+  repeated Bar bars =2;
 }
