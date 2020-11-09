@@ -1,0 +1,11 @@
+message Foo {
+  repeated Bar bars = 1;
+}
+message Bar {
+  optional int32 i = 1;
+  optional int32 j = 2;
+}
+
+service Test {
+  rpc CreateFoo(Foo) returns (Foo) {};
+}

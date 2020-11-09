@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+package pce.bo; //purchase campaign engine business objects
+
+//Message containing Product's identification data required to
+// match with PIM catalogs and\or to use directly in human readable free text description
+message ProductToRequest {
+  google.protobuf.Struct product = 1;
+}
+
+//Message containing Geo, Post and other physical interpretation of delivery point
+message Location {
+  google.protobuf.Struct location = 1;
+}
+
+//Message containing info about Location, Customer desire to be the delivery points
+message CustomerLocations {
+  Location location = 1;
+  enum Type {
+    OWN_STOCK = 0;
+    INTERMEDIATE_STOCK = 1;
+  }
+}
+
+// Message containing info about Dates, Customer desire products to be delivered to.
+message DeliveryDates {
+  google.protobuf.Struct dates = 1;
+}
+
+//Message containing the list of queries which complete the RFQ(RFP)\ANFRAGE
+//Here we consider
+// RFQ as part of queries concerning availability, prices and delivery under standard supplier terms
+// RFP as part of queries concerning possible alterations of standard supplier's terms to meet Customers specific needs
+message Query {
+  google.protobuf.Struct availability = 1;
+  google.protobuf.Struct prices = 2;
+  google.protobuf.Struct delivery_locations_options =3;
+  google.protobuf.Struct delivery_dates = 4;
+  google.protobuf.Struct delivery_services = 5;
+}
+
+//Message containing the full structured representation of RFQ\ANFRAGE entity required to use within
+// RunPurchaseCampaignVerified PCE's service
+message Anfrage {
+  int64 id = 1;
+  string name = 2;
+//  repeated ProductToRequest products_to_request = 1;
+//  CustomerLocations customer_delivery_locations = 2;
+//  DeliveryDates delivery_dates = 3;
+//  Query query_entries = 4;
+}
+
+//
+//
+//// The greeting service definition.
+//service Greeter {
+//  // Sends a greeting
+//  rpc SayHello (HelloRequest) returns (HelloReply) {}
+//  rpc SayHelloEgor (HelloRequest) returns (HelloReply) {}
+//
+//}
+//
+//// The request message containing the user's name.
+//message HelloRequest {
+//  string name = 1;
+//}
+
+//// The response message containing the greetings
+//message HelloReply {
+//  string message = 1;
+//}
